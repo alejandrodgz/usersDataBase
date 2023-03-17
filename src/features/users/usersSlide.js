@@ -18,7 +18,20 @@ const userSlice = createSlice({
 },
   reducers: {
     addUser:(state, action)=>{
-      state.push({...action.payload, id: nanoid()})
+      state.users.push({...action.payload, id: nanoid()})
+    },
+    editUser:(state, action)=>{
+      const {id, name, username, email, company, address, phone, website} = action.payload
+      const userEdit = state.users.find(user => user.id == id)
+      if(userEdit){
+        userEdit.name = name
+        userEdit.username = username
+        userEdit.email = email
+        userEdit.company = company
+        userEdit.address = address
+        userEdit.phone = phone
+        userEdit.website = website
+      } 
     }
   },
   extraReducers(builder) {
